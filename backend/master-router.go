@@ -57,7 +57,9 @@ func SetRouterV1(v1 *http.ServeMux){
 	v1.HandleFunc("/health" , healthV1)
 	v1.HandleFunc("/register",registerV1)
 	v1.HandleFunc("/login" ,loginV1 )
+	
 	v1.HandleFunc("/rooms",roomsV1 )
+
 	v1.HandleFunc("/bookings", bookingsV1)
 
 
