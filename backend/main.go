@@ -11,7 +11,7 @@ func main() {
 
 	setRouter(server)
 	log.Printf("Server is  listening on Port  %s \n" ,server_port)
-	err := http.ListenAndServe(server_port , server)
+	err :=  http.ListenAndServe(server_port , server)
 
 	if err != nil{
 		log.Fatalf("Server  has fallen due  %v\n" ,err)

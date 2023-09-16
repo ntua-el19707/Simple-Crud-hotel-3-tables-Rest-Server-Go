@@ -38,3 +38,4 @@ func getIdUrlParamParseToint(w  http.ResponseWriter , r  * http.Request )(int , 
 			}
 			return id ,err
 }
+

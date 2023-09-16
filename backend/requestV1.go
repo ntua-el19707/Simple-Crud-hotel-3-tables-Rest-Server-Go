@@ -89,7 +89,7 @@ type booking  struct   {
 	
 	CheckIn string `json:"checkIn"`
 	CheckOut string `json:"checkOut"`
-	ClientId int `json:"clientId"`
+
 	RoomId int `json:"roomId"`
 
 
@@ -98,9 +98,7 @@ func (b booking) valid() error{
 	if b.RoomId == 0 {
 		return  errors.New(fmt.Sprintf("rooomId should be  given and  be  integer "))
 	}
-	if b.ClientId == 0 {
-		return  errors.New(fmt.Sprintf("clientId should be  given and  be  integer "))
-	}
+
 
 	err1 :=  validDate(b.CheckIn ,"checkIn field")
 	if err1 != nil {
@@ -222,6 +220,8 @@ func validType(typeOfRoom string) error{
 
 	return nil
 }
+
+
 
 func  validDate(date ,field string  ) error{
 	   // Declaring layout constant

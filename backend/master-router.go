@@ -1,6 +1,8 @@
 package main
 
-import "net/http"
+import (
+	"net/http"
+)
 
 //messages
 const ResourceNotFound = "The resource  Not Found"
@@ -40,11 +42,12 @@ func V1Handler(w http.ResponseWriter  ,  r * http.Request) {
 */
 func setRouter(s *http.ServeMux){
 	    
-        s.HandleFunc("/",MainHandler)
+        s.HandleFunc("/",  MainHandler)
 		//version 1 	
 	    v1 :=  http.NewServeMux()
 		SetRouterV1(v1)
 		s.Handle("/v1/",  http.StripPrefix("/v1" ,  v1))
+
 }
 
 //routers 
@@ -53,14 +56,19 @@ func setRouter(s *http.ServeMux){
 	@Param  v1 * http.ServeMux -  server
 */
 func SetRouterV1(v1 *http.ServeMux){
+    
 	v1.HandleFunc("/" , V1Handler)
 	v1.HandleFunc("/health" , healthV1)
 	v1.HandleFunc("/register",registerV1)
 	v1.HandleFunc("/login" ,loginV1 )
 	
-	v1.HandleFunc("/rooms",roomsV1 )
+	block1	:= [] string {http.MethodPost ,http.MethodPut , http.MethodDelete}
+	v1.HandleFunc("/rooms", blockingRoleMethod(roomsV1 , "client" , block1... ))
 
-	v1.HandleFunc("/bookings", bookingsV1)
+	blockAdmin	:= [] string {http.MethodPost}
+
+	v1.HandleFunc("/bookings", blockingRoleMethod(bookingsV1 , "admin" , blockAdmin... ))
 
 
 }
+
