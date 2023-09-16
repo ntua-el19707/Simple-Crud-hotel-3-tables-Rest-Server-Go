@@ -6,6 +6,8 @@ services:
   db:
     image: postgres
     restart: always
+    ports:
+     - 5433:5432
     environment:
-      POSTGRES_PASSWORD: 56ERqjsdtF76
-      POSTGRES_USER: Dummy
+      POSTGRES_PASSWORD: 124356
+      POSTGRES_USER: dummy
